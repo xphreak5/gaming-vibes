@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { useContext } from 'react'
+import AuthContext from "../stores/authContext"
 
 export default function Navbar() {
+  const { user, login, authReady, logout } = useContext(AuthContext)
+  console.log(user);
+
   return (
     <div className="container">
       <nav>
@@ -10,6 +15,7 @@ export default function Navbar() {
         <ul>
           <li><Link href="/"><a>Home</a></Link></li>
           <li><Link href="/guides"><a>Guides</a></Link></li>
+          {user ? (<li>Welcome <strong>{user.user_metadata.full_name}</strong> <button onClick={logout} className="btn">Log Out</button></li>) : (<li onClick={login} className="btn">Log in/Sign Up</li>)}
         </ul>
       </nav>
       <div className="banner">
