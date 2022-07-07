@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import AuthContext from "../stores/authContext"
 
 export default function Navbar() {
-  const { user, login, authReady, logout } = useContext(AuthContext)
+  const { user, login, logout, authReady } = useContext(AuthContext)
   console.log(user);
 
   return (
@@ -12,11 +12,14 @@ export default function Navbar() {
       <nav>
         <Image src="/rupee.png" width={50} height={48} alt="rupee"/>
         <h1>Gaming Vibes</h1>
+        {authReady && (
+
         <ul>
           <li><Link href="/"><a>Home</a></Link></li>
           <li><Link href="/guides"><a>Guides</a></Link></li>
           {user ? (<li>Welcome <strong>{user.user_metadata.full_name}</strong> <button onClick={logout} className="btn">Log Out</button></li>) : (<li onClick={login} className="btn">Log in/Sign Up</li>)}
-        </ul>
+         </ul>
+        )}
       </nav>
       <div className="banner">
         <Image src="/banner.png" width={966} height={276} alt="banner"/>
